@@ -37,7 +37,7 @@ class Request extends Component<RequestProps, RequestState> {
                 "}], "temperature": 0.7 }`,
           headers: {
             Authorization:
-              "Bearer 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",
+              "Bearer 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",
             "Content-Type": "application/json",
           },
           method: "POST",
