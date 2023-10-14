@@ -1,38 +1,35 @@
 import React, { Component } from "react";
 import Request from "../components/fetchGPT";
 import TextBox from "../components/textBox";
-import Button from "../components/button";
 
 interface AppState {
-  message: string;
+  input: string
+  output: string;
 }
 
 class App extends Component<{}, AppState> {
   constructor(props: any) {
     super(props);
-    this.state = { message: "placeholder" };
+    this.state = { input: "", output: "No reply yet" };
   }
 
   handleTextChange = (value: string) => {
-    this.setState({ message: value });
+    this.setState({ input: value });
   };
 
-  handleButtonClick = () => {
-    console.log(`Button clicked with text: ${"hi"}`);
+  handleButtonClick = (message: string) => {
+    this.setState({ output: message });
   };
 
   render(): any {
     return (
       <div>
+        <TextBox value={ this.state.input } onChange={ this.handleTextChange } />
         <Request
-          message={this.state.message}
-          onChangeMessage={(message: string) => {
-            this.setState({ message: message });
-          }}
+          input={ this.state.input }
+          onChangeMessage={ this.handleButtonClick }
         />
-        <textarea value={this.state.message} />
-        <TextBox value={this.state.message} onChange={this.handleTextChange} />
-        <Button label="Submit" onClick={this.handleButtonClick} />
+        <p>{this.state.output}</p>
       </div>
     );
   }

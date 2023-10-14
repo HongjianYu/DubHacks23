@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 
 interface RequestProps {
-  message: string;
+  input: string;
   onChangeMessage(message: string): void;
 }
 
@@ -27,15 +27,17 @@ class Request extends Component<RequestProps, RequestState> {
   }
 
   async requestGPT() {
-    console.log("Requesting");
+    console.log("Prompt: " + this.props.input);
     try {
       let resp: Response = await fetch(
         "https://api.openai.com/v1/chat/completions",
         {
-          body: '{ "model": "gpt-3.5-turbo", "messages": [{"role": "user", "content": "Say this is a test!"}], "temperature": 0.7 }',
+          body: `{ "model": "gpt-4", "messages": [{"role": "user", "content": "\
+                ${this.props.input}\
+                "}], "temperature": 0.7 }`,
           headers: {
             Authorization:
-              "Bearer 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",
+              "Bearer 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",
             "Content-Type": "application/json",
           },
           method: "POST",
@@ -46,6 +48,7 @@ class Request extends Component<RequestProps, RequestState> {
         alert("The status is wrong! Expected: 200, Was: " + resp.status);
         return;
       }
+
       let completion: any = await resp.json();
       console.log(completion["choices"][0]["message"]["content"]);
       this.props.onChangeMessage(
