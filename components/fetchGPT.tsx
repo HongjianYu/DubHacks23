@@ -45,7 +45,6 @@ class Request extends Component<RequestProps, RequestState> {
   async requestGPTDaily(prompt: string, onChange: Function) {
     console.log("Prompt: " + prompt);
     try {
-      console.log(process.env.NEXT_PUBLIC_OPENAI_API_KEY as string);
       let resp: Response = await fetch(
         "https://api.openai.com/v1/chat/completions",
         {
@@ -64,7 +63,7 @@ class Request extends Component<RequestProps, RequestState> {
       }
 
       let completion: any = await resp.json();
-      console.log(completion["choices"][0]["message"]["content"]);
+      console.log("Completion:\n" + completion["choices"][0]["message"]["content"]);
       onChange(completion["choices"][0]["message"]["content"]);
     } catch (e) {
       alert("There was an error contacting the server.");

@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import Request from "../components/fetchGPT";
 import TextBox from "../components/textBox";
+import MonthlyEval from "../components/monthlyEval";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 
@@ -70,11 +71,13 @@ class App extends Component<{}, AppState> {
     return (
       <div>
         <p>ReFlow</p>
+
         <DatePicker
           maxDate={this.today}
           selected={this.state.date}
           onChange={this.handleDateChange}
         />
+
         <div>
           <TextBox value={this.state.input} onChange={this.handleTextChange} />
           <button onClick={this.handleDiarySave}>Save</button>
@@ -86,12 +89,18 @@ class App extends Component<{}, AppState> {
           onChangeFeedback={this.handleFeedback}
           onChangeDiary={this.handleDiarySave}
         />
+
         <div>
           <p>Mood: {this.state.mood[this.state.date.toDateString()]}</p>
           <p>Feedback: {this.state.feedback[this.state.date.toDateString()]}</p>
           <p>Diary: {this.state.diary[this.state.date.toDateString()]}</p>
           <button onClick={this.handleClearDiary}>Clear Diary</button>
         </div>
+
+        <MonthlyEval
+          diary={this.state.diary}
+          date={this.state.date}
+        />
       </div>
     );
   }
