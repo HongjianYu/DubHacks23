@@ -29,7 +29,7 @@ class Request extends Component<RequestProps, RequestState> {
   async requestGPT() {
     console.log("Prompt: " + this.props.input);
     try {
-      console.log((process.env.OPENAI_API_KEY as string));
+      console.log((process.env.NEXT_PUBLIC_OPENAI_API_KEY as string));
       let resp: Response = await fetch(
         "https://api.openai.com/v1/chat/completions",
         {
@@ -38,7 +38,7 @@ class Request extends Component<RequestProps, RequestState> {
                 "}], "temperature": 0.7 }`,
           headers: {
             Authorization:
-              `Bearer ${(process.env.OPENAI_API_KEY as string)}`,
+              `Bearer ${process.env.NEXT_PUBLIC_OPENAI_API_KEY}`,
             "Content-Type": "application/json",
           },
           method: "POST",
