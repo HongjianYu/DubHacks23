@@ -85,9 +85,10 @@ class App extends Component<{}, AppState> {
     const pStyle: React.CSSProperties = {
       color: "white", // Set the text color to white
     };
+
     return (
       <div style={containerStyle}>
-        <img src="header.png" height="15%" />
+        <img src="header.png" height="15%" alt={"ReFlow"} />
 
         <DatePicker
           maxDate={this.today}
@@ -122,6 +123,7 @@ class App extends Component<{}, AppState> {
             {this.state.feedback[this.state.date.toDateString()]}
           </h1>
         </div>
+
         <h1 style={{ marginTop: "4%" }}>
           <MonthlyEval diary={this.state.diary} date={this.state.date} />
         </h1>
