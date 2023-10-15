@@ -122,9 +122,9 @@ class App extends Component<{}, AppState> {
           <button onClick={this.handleClearDiary}>Clear Diary</button>
         </span>
 
-        <p style={pStyle}>Receive feedback here</p>
+        <h1 style={pStyle}>Here is Your Feedback</h1>
 
-        <div style={{ marginTop: "3%" }}>
+        <div style={{ marginBottom: "2%" }}>
           <MoodColor mood={this.state.mood} date={this.state.date}></MoodColor>
         </div>
         <textarea
