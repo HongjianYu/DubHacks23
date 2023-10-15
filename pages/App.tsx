@@ -6,9 +6,9 @@ import "react-datepicker/dist/react-datepicker.css";
 
 interface AppState {
   input: string;
-  diary: string[];
-  mood: string[];
-  feedback: string[];
+  diary: object;
+  feedback: object;
+  mood: object;
   date: Date;
 }
 
@@ -17,10 +17,10 @@ class App extends Component<{}, AppState> {
     super(props);
     this.state = {
       input: "",
-      mood: [],
-      feedback: [],
-      diary: [],
       date: new Date(),
+      diary: {},
+      feedback: {},
+      mood: {},
     };
   }
 
@@ -29,21 +29,27 @@ class App extends Component<{}, AppState> {
   };
 
   handleDiarySave = () => {
-    const updatedDiaryData = [...this.state.diary];
-    updatedDiaryData[this.state.date.toDateString()] = this.state.input;
-    this.setState({ diary: updatedDiaryData });
+    this.setState((prevState) => {
+      const updatedDiaryData = { ...prevState.diary };
+      updatedDiaryData[prevState.date.toDateString()] = prevState.input;
+      return { diary: updatedDiaryData };
+    });
   };
 
   handleMood = (mood: string) => {
-    const updatedMoodData = [...this.state.mood];
-    updatedMoodData[this.state.date.toDateString()] = mood;
-    this.setState({ mood: updatedMoodData });
+    this.setState((prevState) => {
+      const updatedMoodData = { ...prevState.mood };
+      updatedMoodData[prevState.date.toDateString()] = mood;
+      return { mood: updatedMoodData };
+    });
   };
 
   handleFeedback = (feedback: string) => {
-    const updatedFeedbackData = [...this.state.feedback];
-    updatedFeedbackData[this.state.date.toDateString()] = feedback;
-    this.setState({ feedback: updatedFeedbackData });
+    this.setState((prevState) => {
+      const updatedFeedbackData = { ...prevState.feedback };
+      updatedFeedbackData[prevState.date.toDateString()] = feedback;
+      return { feedback: updatedFeedbackData };
+    });
   };
 
   handleDateChange = (datep: Date) => {
@@ -51,9 +57,11 @@ class App extends Component<{}, AppState> {
   };
 
   handleClearDiary = () => {
-    const updatedDiaryData = [...this.state.diary];
-    updatedDiaryData[this.state.date.toDateString()] = "";
-    this.setState({ diary: updatedDiaryData });
+    this.setState((prevState) => {
+      const updatedDiaryData = { ...prevState.diary };
+      updatedDiaryData[prevState.date.toDateString()] = "";
+      return { diary: updatedDiaryData };
+    });
   };
 
   today = new Date();
