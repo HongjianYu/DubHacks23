@@ -102,13 +102,15 @@ class App extends Component<{}, AppState> {
       <div style={containerStyle}>
         <img src="header.png" height="15%" alt={"ReFlow"} />
 
+        <h2 style={pStyle}>Select a date to start</h2>
+
         <DatePicker
           maxDate={this.today}
           selected={this.state.date}
           onChange={this.handleDateChange}
         />
 
-        <p style={pStyle}>Write your diary here</p>
+        <h2 style={pStyle}>Write your diary here</h2>
 
         <TextBox value={this.state.input} onChange={this.handleTextChange} />
         <span style={{ marginTop: "1%" }}>
@@ -122,15 +124,15 @@ class App extends Component<{}, AppState> {
           <button onClick={this.handleClearDiary}>Clear Diary</button>
         </span>
 
-        <h1 style={pStyle}>Here is Your Feedback</h1>
+        <h2 style={pStyle}>Here is Your Feedback</h2>
 
         <div style={{ marginBottom: "2%" }}>
           <MoodColor mood={this.state.mood} date={this.state.date}></MoodColor>
         </div>
         <textarea
           style={{
-            width: "60%",
-            height: "50%",
+            width: "50%",
+            height: "10%",
           }}
           value={
             this.state.date.toDateString() in this.state.feedback
