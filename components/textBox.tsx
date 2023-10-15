@@ -10,8 +10,13 @@ class TextBox extends Component<TextBoxProps> {
     const { value, onChange } = this.props;
 
     return (
-      <input
-        type="text"
+      <textarea
+        style={{
+          width: "370px",
+          height: "370px",
+          padding: "10px",
+          marginLeft: "300px",
+        }}
         value={value}
         onChange={(e) => onChange(e.target.value)}
         placeholder="Write your diary here"
