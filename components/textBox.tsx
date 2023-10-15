@@ -13,8 +13,7 @@ class TextBox extends Component<TextBoxProps> {
       <textarea
         style={{
           width: "50%",
-          height: "25%",
-          marginTop: "2%",
+          height: "25%"
         }}
         value={value}
         onChange={(e) => onChange(e.target.value)}

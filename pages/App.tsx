@@ -108,22 +108,25 @@ class App extends Component<{}, AppState> {
           onChange={this.handleDateChange}
         />
 
+        <p style={pStyle}>Write your diary here</p>
+
         <TextBox value={this.state.input} onChange={this.handleTextChange} />
-        <span style={{ marginTop: "4%" }}>
-          <button onClick={this.handleDiarySave}>Save</button>
-          <button onClick={this.handleClearDiary}>Clear Diary</button>
+        <span style={{ marginTop: "1%" }}>
           <Request
             input={this.state.input}
             onChangeMood={this.handleMood}
             onChangeFeedback={this.handleFeedback}
             onChangeDiary={this.handleDiarySave}
           />
+          <button onClick={this.handleDiarySave}>Save</button>
+          <button onClick={this.handleClearDiary}>Clear Diary</button>
         </span>
+
+        <p style={pStyle}>Receive feedback here</p>
 
         <div style={{ marginTop: "3%" }}>
           <MoodColor mood={this.state.mood} date={this.state.date}></MoodColor>
         </div>
-        <h1 style={pStyle}>Feedback:</h1>
         <textarea
           style={{
             width: "60%",
