@@ -1,4 +1,3 @@
-// const process = require('process');
 import React, { Component } from "react";
 
 interface RequestProps {
