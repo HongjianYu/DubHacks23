@@ -142,9 +142,7 @@ class App extends Component<{}, AppState> {
           readOnly
         />
 
-        <h1 style={{ marginTop: "2%" }}>
-          <MonthlyEval diary={this.state.diary} date={this.state.date} />
-        </h1>
+        <MonthlyEval diary={this.state.diary} date={this.state.date} />
       </div>
     );
   }

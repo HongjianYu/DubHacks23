@@ -17,15 +17,37 @@ class MonthlyEval extends Component<MonthlyEvalProps, MonthlyEvalState> {
 
   render(): any {
     return (
-      <div>
+      <div
+        style={{
+          flexDirection: "column",
+          alignItems: "center",
+          display: "flex",
+          height: "70%",
+          width: "80%",
+          marginTop: "2%",
+        }}
+      >
         <button
           onClick={() => {
             this.requestGPTMonthly().then();
           }}
+          style={{ marginBottom: "2%" }}
         >
-          Evaluate your {this.props.date ? this.props.date.toLocaleString('en-us', { month: 'long' }) : "Month"}
+          {`Evaluate your 
+          ${
+            this.props.date
+              ? this.props.date.toLocaleString("en-us", { month: "long" })
+              : "Month"
+          }`}
         </button>
-        <p>{this.state.eval}</p>
+        <textarea
+          style={{
+            width: "76%",
+            height: "68%",
+          }}
+          value={this.state.eval || ""}
+          readOnly
+        />
       </div>
     );
   }
@@ -38,14 +60,21 @@ class MonthlyEval extends Component<MonthlyEvalProps, MonthlyEvalState> {
     loopDate.setDate(1);
     while (loopDate.getMonth() === month) {
       if (loopDate.toDateString() in this.props.diary) {
-        diariesInAMonth.push("Day " + loopDate.getDate() + ": " +
-          this.props.diary[loopDate.toDateString()] + "| ");
+        diariesInAMonth.push(
+          "Day " +
+            loopDate.getDate() +
+            ": " +
+            this.props.diary[loopDate.toDateString()] +
+            "| "
+        );
       }
       loopDate.setDate(loopDate.getDate() + 1);
     }
 
     let prompt: string =
-      `The following text is someone's diaries in a month, separated by |. ${diariesInAMonth.join("")}` +
+      `The following text is someone's diaries in a month, separated by |. ${diariesInAMonth.join(
+        ""
+      )}` +
       `$This is the end of the text. Provide a monthly report/feedback. Use second person.` +
       `Your feedback should only include the feedback itself without the first-line declaration.`;
 
@@ -69,7 +98,9 @@ class MonthlyEval extends Component<MonthlyEvalProps, MonthlyEvalState> {
       }
 
       let completion: any = await resp.json();
-      console.log("Completion:\n" + completion["choices"][0]["message"]["content"]);
+      console.log(
+        "Completion:\n" + completion["choices"][0]["message"]["content"]
+      );
       this.setState({ eval: completion["choices"][0]["message"]["content"] });
     } catch (e) {
       alert("There was an error contacting the server.");
