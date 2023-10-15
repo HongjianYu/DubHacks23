@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import Request from "../components/fetchGPT";
 import TextBox from "../components/textBox";
+import MoodColor from "../components/moodColor";
 import MonthlyEval from "../components/monthlyEval";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
@@ -92,6 +93,7 @@ class App extends Component<{}, AppState> {
 
         <div>
           <p>Mood: {this.state.mood[this.state.date.toDateString()]}</p>
+          <MoodColor mood={this.state.mood} date={this.state.date}></MoodColor>
           <p>Feedback: {this.state.feedback[this.state.date.toDateString()]}</p>
           <p>Diary: {this.state.diary[this.state.date.toDateString()]}</p>
           <button onClick={this.handleClearDiary}>Clear Diary</button>

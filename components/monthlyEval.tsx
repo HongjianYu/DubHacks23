@@ -39,14 +39,14 @@ class MonthlyEval extends Component<MonthlyEvalProps, MonthlyEvalState> {
     while (loopDate.getMonth() === month) {
       if (loopDate.toDateString() in this.props.diary) {
         diariesInAMonth.push("Day " + loopDate.getDate() + ": " +
-          this.props.diary[loopDate.toDateString()] + " ");
+          this.props.diary[loopDate.toDateString()] + "| ");
       }
       loopDate.setDate(loopDate.getDate() + 1);
     }
 
     let prompt: string =
-      `The following text is someone's diaries in a month: ${diariesInAMonth.join("")}` +
-      `This is the end of the text. Provide a monthly report/feedback. ` +
+      `The following text is someone's diaries in a month, separated by |. ${diariesInAMonth.join("")}` +
+      `$This is the end of the text. Provide a monthly report/feedback. Use second person.` +
       `Your feedback should only include the feedback itself without the first-line declaration.`;
 
     console.log("Prompt: " + prompt);

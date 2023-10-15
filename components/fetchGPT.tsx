@@ -21,7 +21,7 @@ class Request extends Component<RequestProps, RequestState> {
       `ONLY RETURN THE NUMBER WITHOUT ANY TEXT.`;
     let feedbackPrompt: string =
       `Provide an interactive feedback of at least 50 words on the following diary: ` +
-      `'${this.props.input}'. ` +
+      `'${this.props.input}'. Do not dictate the author.` +
       `Only include the feedback itself without the first-line declaration.`;
 
     return (
