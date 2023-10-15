@@ -66,7 +66,7 @@ class App extends Component<{}, AppState> {
   };
 
   handleDateChange = (datep: Date) => {
-    this.setState((prevState) => {
+    this.setState(() => {
       return {
         date: datep,
       };
@@ -100,7 +100,7 @@ class App extends Component<{}, AppState> {
 
     return (
       <div style={containerStyle}>
-        <img src="header.png" height="15%" alt={"ReFlow"} />
+        <img src="header.png" height="12%" alt={"ReFlow"}/>
 
         <h2 style={pStyle}>Select a date to start</h2>
 
@@ -126,9 +126,8 @@ class App extends Component<{}, AppState> {
 
         <h2 style={pStyle}>Here is Your Feedback</h2>
 
-        <div style={{ marginBottom: "2%" }}>
-          <MoodColor mood={this.state.mood} date={this.state.date}></MoodColor>
-        </div>
+        <MoodColor mood={this.state.mood} date={this.state.date}></MoodColor>
+
         <textarea
           style={{
             width: "50%",

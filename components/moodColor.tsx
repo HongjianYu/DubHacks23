@@ -40,13 +40,14 @@ class MoodColor extends Component<MoodColorProps, MoodColorState> {
     return (
       <div
         style={{
-          width: "600px",
-          height: "30px",
+          width: "50%",
+          height: "0.5%",
           background:
             this.props.date && this.props.date.toDateString() in this.props.mood
               ? colors[this.props.mood[this.props.date.toDateString()]]
               : "#FFFFFF",
-          margin: "auto",
+
+          marginBottom: "0.5%",
         }}
       >
         <div></div>

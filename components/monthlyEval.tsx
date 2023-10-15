@@ -22,8 +22,8 @@ class MonthlyEval extends Component<MonthlyEvalProps, MonthlyEvalState> {
           flexDirection: "column",
           alignItems: "center",
           display: "flex",
-          height: "30%",
-          width: "60%",
+          height: "15%",
+          width: "50%",
           marginTop: "2%",
           marginBottom: "2%",
         }}
