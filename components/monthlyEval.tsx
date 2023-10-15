@@ -22,9 +22,10 @@ class MonthlyEval extends Component<MonthlyEvalProps, MonthlyEvalState> {
           flexDirection: "column",
           alignItems: "center",
           display: "flex",
-          height: "70%",
-          width: "80%",
+          height: "30%",
+          width: "60%",
           marginTop: "2%",
+          marginBottom: "2%",
         }}
       >
         <button
@@ -42,8 +43,8 @@ class MonthlyEval extends Component<MonthlyEvalProps, MonthlyEvalState> {
         </button>
         <textarea
           style={{
-            width: "76%",
-            height: "68%",
+            width: "100%",
+            height: "100%",
           }}
           value={this.state.eval || ""}
           readOnly
