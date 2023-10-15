@@ -3,22 +3,27 @@ import Request from "../components/fetchGPT";
 import TextBox from "../components/textBox";
 
 interface AppState {
-  input: string
-  output: string;
+  input: string;
+  mood: string;
+  feedback: string;
 }
 
 class App extends Component<{}, AppState> {
   constructor(props: any) {
     super(props);
-    this.state = { input: "", output: "No reply yet" };
+    this.state = { input: "", mood: "No reply yet", feedback: "No reply yet" };
   }
 
   handleTextChange = (value: string) => {
     this.setState({ input: value });
   };
 
-  handleButtonClick = (message: string) => {
-    this.setState({ output: message });
+  handleMood = (mood: string) => {
+    this.setState({ mood: mood });
+  };
+
+  handleFeedback = (feedback: string) => {
+    this.setState({ feedback: feedback });
   };
 
   render(): any {
@@ -27,9 +32,14 @@ class App extends Component<{}, AppState> {
         <TextBox value={ this.state.input } onChange={ this.handleTextChange } />
         <Request
           input={ this.state.input }
-          onChangeMessage={ this.handleButtonClick }
+          onChangeMood={ this.handleMood }
+          onChangeFeedback={ this.handleFeedback }
         />
-        <p>{this.state.output}</p>
+        <div>
+          <p>Mood: {this.state.mood}</p>
+          <p>Feedback:</p>
+          <p>{this.state.feedback}</p>
+        </div>
       </div>
     );
   }
