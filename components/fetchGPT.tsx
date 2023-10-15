@@ -1,3 +1,4 @@
+// const process = require('process');
 import React, { Component } from "react";
 
 interface RequestProps {
@@ -29,6 +30,7 @@ class Request extends Component<RequestProps, RequestState> {
   async requestGPT() {
     console.log("Prompt: " + this.props.input);
     try {
+      console.log((process.env.OPENAI_API_KEY as string));
       let resp: Response = await fetch(
         "https://api.openai.com/v1/chat/completions",
         {
@@ -37,7 +39,7 @@ class Request extends Component<RequestProps, RequestState> {
                 "}], "temperature": 0.7 }`,
           headers: {
             Authorization:
-              "Bearer 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",
+              `Bearer ${(process.env.OPENAI_API_KEY as string)}`,
             "Content-Type": "application/json",
           },
           method: "POST",
