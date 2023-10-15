@@ -14,7 +14,7 @@ class TextBox extends Component<TextBoxProps> {
         type="text"
         value={value}
         onChange={(e) => onChange(e.target.value)}
-        placeholder="enter something"
+        placeholder="Write your diary here"
       />
     );
   }

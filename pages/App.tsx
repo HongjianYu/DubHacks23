@@ -29,6 +29,7 @@ class App extends Component<{}, AppState> {
   render(): any {
     return (
       <div>
+        <p>ReFlow</p>
         <TextBox value={ this.state.input } onChange={ this.handleTextChange } />
         <Request
           input={ this.state.input }
