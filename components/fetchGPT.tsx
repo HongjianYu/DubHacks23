@@ -25,20 +25,18 @@ class Request extends Component<RequestProps, RequestState> {
       `Only include the feedback itself without the first-line declaration.`;
 
     return (
-      <div>
-        <button
-          onClick={() => {
-            this.requestGPTDaily(moodPrompt, this.props.onChangeMood).then();
-            this.requestGPTDaily(
-              feedbackPrompt,
-              this.props.onChangeFeedback
-            ).then();
-            this.props.onChangeDiary();
-          }}
-        >
-          Test Chat
-        </button>
-      </div>
+      <button
+        onClick={() => {
+          this.requestGPTDaily(moodPrompt, this.props.onChangeMood).then();
+          this.requestGPTDaily(
+            feedbackPrompt,
+            this.props.onChangeFeedback
+          ).then();
+          this.props.onChangeDiary();
+        }}
+      >
+        Generate
+      </button>
     );
   }
 
@@ -63,7 +61,9 @@ class Request extends Component<RequestProps, RequestState> {
       }
 
       let completion: any = await resp.json();
-      console.log("Completion:\n" + completion["choices"][0]["message"]["content"]);
+      console.log(
+        "Completion:\n" + completion["choices"][0]["message"]["content"]
+      );
       onChange(completion["choices"][0]["message"]["content"]);
     } catch (e) {
       alert("There was an error contacting the server.");
