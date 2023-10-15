@@ -55,23 +55,39 @@ class App extends Component<{}, AppState> {
   };
 
   handleDateChange = (datep: Date) => {
-    this.setState({ date: datep, input: "" });
+    this.setState({
+      date: datep,
+      input: "",
+    });
   };
 
   handleClearDiary = () => {
     this.setState((prevState) => {
       const updatedDiaryData = { ...prevState.diary };
-      updatedDiaryData[prevState.date.toDateString()] = "";
-      return { diary: updatedDiaryData };
+      delete updatedDiaryData[prevState.date.toDateString()];
+      return { diary: updatedDiaryData, input: "" };
     });
   };
 
   today = new Date();
 
   render(): any {
+    const containerStyle: React.CSSProperties = {
+      display: "flex",
+      flexDirection: "column",
+      alignItems: "center",
+
+      height: "100vh",
+      backgroundImage: "url(backdrop.png)",
+      backgroundSize: "cover",
+    };
+
+    const pStyle: React.CSSProperties = {
+      color: "white", // Set the text color to white
+    };
     return (
-      <div>
-        <p>ReFlow</p>
+      <div style={containerStyle}>
+        <img src="header.png" height="15%" />
 
         <DatePicker
           maxDate={this.today}
@@ -79,30 +95,36 @@ class App extends Component<{}, AppState> {
           onChange={this.handleDateChange}
         />
 
-        <div>
-          <TextBox value={this.state.input} onChange={this.handleTextChange} />
+        <TextBox value={this.state.input} onChange={this.handleTextChange} />
+        <div style={pStyle}>
+          Diary:
+          {this.state.diary[this.state.date.toDateString()]}
+        </div>
+        <span style={{ marginTop: "4%" }}>
           <button onClick={this.handleDiarySave}>Save</button>
-        </div>
-
-        <Request
-          input={this.state.input}
-          onChangeMood={this.handleMood}
-          onChangeFeedback={this.handleFeedback}
-          onChangeDiary={this.handleDiarySave}
-        />
-
-        <div>
-          <p>Mood: {this.state.mood[this.state.date.toDateString()]}</p>
-          <MoodColor mood={this.state.mood} date={this.state.date}></MoodColor>
-          <p>Feedback: {this.state.feedback[this.state.date.toDateString()]}</p>
-          <p>Diary: {this.state.diary[this.state.date.toDateString()]}</p>
           <button onClick={this.handleClearDiary}>Clear Diary</button>
-        </div>
+          <Request
+            input={this.state.input}
+            onChangeMood={this.handleMood}
+            onChangeFeedback={this.handleFeedback}
+            onChangeDiary={this.handleDiarySave}
+          />
+        </span>
 
-        <MonthlyEval
-          diary={this.state.diary}
-          date={this.state.date}
-        />
+        <div style={{ height: "30vh", marginTop: "4%" }}>
+          <h1 style={pStyle}>
+            Mood:
+            {this.state.mood[this.state.date.toDateString()]}
+          </h1>
+          <MoodColor mood={this.state.mood} date={this.state.date}></MoodColor>
+          <h1 style={pStyle}>
+            Feedback:
+            {this.state.feedback[this.state.date.toDateString()]}
+          </h1>
+        </div>
+        <h1 style={{ marginTop: "4%" }}>
+          <MonthlyEval diary={this.state.diary} date={this.state.date} />
+        </h1>
       </div>
     );
   }
