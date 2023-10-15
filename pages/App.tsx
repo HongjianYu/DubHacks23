@@ -89,7 +89,7 @@ class App extends Component<{}, AppState> {
       flexDirection: "column",
       alignItems: "center",
 
-      height: "100vh",
+      height: "150vh",
       backgroundImage: "url(backdrop.png)",
       backgroundSize: "cover",
     };
@@ -126,8 +126,8 @@ class App extends Component<{}, AppState> {
         <h1 style={pStyle}>Feedback:</h1>
         <textarea
           style={{
-            width: "auto",
-            height: "auto",
+            width: "60%",
+            height: "50%",
           }}
           value={
             this.state.date.toDateString() in this.state.feedback
