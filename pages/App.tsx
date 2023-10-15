@@ -126,11 +126,14 @@ class App extends Component<{}, AppState> {
         <h1 style={pStyle}>Feedback:</h1>
         <textarea
           style={{
-            width: "50%",
-            height: "25%",
-            marginTop: "2%",
+            width: "auto",
+            height: "auto",
           }}
-          value={this.state.feedback[this.state.date.toDateString()]}
+          value={
+            this.state.date.toDateString() in this.state.feedback
+              ? this.state.feedback[this.state.date.toDateString()]
+              : ""
+          }
           readOnly
         />
 
