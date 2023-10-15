@@ -26,6 +26,17 @@ class App extends Component<{}, AppState> {
     };
   }
 
+  componentDidUpdate(prevProps, prevState) {
+    if (this.state.date !== prevState.date) {
+      this.setState({
+        input:
+          this.state.date.toDateString() in this.state.diary
+            ? this.state.diary[this.state.date.toDateString()]
+            : "",
+      });
+    }
+  }
+
   handleTextChange = (value: string) => {
     this.setState({ input: value });
   };
@@ -55,9 +66,10 @@ class App extends Component<{}, AppState> {
   };
 
   handleDateChange = (datep: Date) => {
-    this.setState({
-      date: datep,
-      input: "",
+    this.setState((prevState) => {
+      return {
+        date: datep,
+      };
     });
   };
 
@@ -97,10 +109,6 @@ class App extends Component<{}, AppState> {
         />
 
         <TextBox value={this.state.input} onChange={this.handleTextChange} />
-        <div style={pStyle}>
-          Diary:
-          {this.state.diary[this.state.date.toDateString()]}
-        </div>
         <span style={{ marginTop: "4%" }}>
           <button onClick={this.handleDiarySave}>Save</button>
           <button onClick={this.handleClearDiary}>Clear Diary</button>
@@ -112,19 +120,21 @@ class App extends Component<{}, AppState> {
           />
         </span>
 
-        <div style={{ height: "30vh", marginTop: "4%" }}>
-          <h1 style={pStyle}>
-            Mood:
-            {this.state.mood[this.state.date.toDateString()]}
-          </h1>
+        <div style={{ marginTop: "3%" }}>
           <MoodColor mood={this.state.mood} date={this.state.date}></MoodColor>
-          <h1 style={pStyle}>
-            Feedback:
-            {this.state.feedback[this.state.date.toDateString()]}
-          </h1>
         </div>
+        <h1 style={pStyle}>Feedback:</h1>
+        <textarea
+          style={{
+            width: "50%",
+            height: "25%",
+            marginTop: "2%",
+          }}
+          value={this.state.feedback[this.state.date.toDateString()]}
+          readOnly
+        />
 
-        <h1 style={{ marginTop: "4%" }}>
+        <h1 style={{ marginTop: "2%" }}>
           <MonthlyEval diary={this.state.diary} date={this.state.date} />
         </h1>
       </div>
